@@ -49,6 +49,7 @@ Rclone *("rsync for cloud storage")* is a command-line program to sync files and
   * China Mobile Ecloud Elastic Object Storage (EOS) [:page_facing_up:](https://rclone.org/s3/#china-mobile-ecloud-eos)
   * Cloudflare R2 [:page_facing_up:](https://rclone.org/s3/#cloudflare-r2)
   * Citrix ShareFile [:page_facing_up:](https://rclone.org/sharefile/)
+  * Digiposte [:page_facing_up:](https://rclone.org/digiposte/)
   * DigitalOcean Spaces [:page_facing_up:](https://rclone.org/s3/#digitalocean-spaces)
   * Digi Storage [:page_facing_up:](https://rclone.org/koofr/#digi-storage)
   * Dreamhost [:page_facing_up:](https://rclone.org/s3/#dreamhost)
