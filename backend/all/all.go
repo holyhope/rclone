@@ -4,7 +4,6 @@ package all
 import (
 	// Active file systems
 	_ "github.com/rclone/rclone/backend/alias"
-	_ "github.com/rclone/rclone/backend/amazonclouddrive"
 	_ "github.com/rclone/rclone/backend/azureblob"
 	_ "github.com/rclone/rclone/backend/azurefiles"
 	_ "github.com/rclone/rclone/backend/b2"
@@ -14,6 +13,7 @@ import (
 	_ "github.com/rclone/rclone/backend/combine"
 	_ "github.com/rclone/rclone/backend/compress"
 	_ "github.com/rclone/rclone/backend/crypt"
+	_ "github.com/rclone/rclone/backend/digiposte"
 	_ "github.com/rclone/rclone/backend/drive"
 	_ "github.com/rclone/rclone/backend/dropbox"
 	_ "github.com/rclone/rclone/backend/fichier"
@@ -25,6 +25,7 @@ import (
 	_ "github.com/rclone/rclone/backend/hdfs"
 	_ "github.com/rclone/rclone/backend/hidrive"
 	_ "github.com/rclone/rclone/backend/http"
+	_ "github.com/rclone/rclone/backend/imagekit"
 	_ "github.com/rclone/rclone/backend/internetarchive"
 	_ "github.com/rclone/rclone/backend/jottacloud"
 	_ "github.com/rclone/rclone/backend/koofr"
@@ -53,6 +54,7 @@ import (
 	_ "github.com/rclone/rclone/backend/storj"
 	_ "github.com/rclone/rclone/backend/sugarsync"
 	_ "github.com/rclone/rclone/backend/swift"
+	_ "github.com/rclone/rclone/backend/ulozto"
 	_ "github.com/rclone/rclone/backend/union"
 	_ "github.com/rclone/rclone/backend/uptobox"
 	_ "github.com/rclone/rclone/backend/webdav"

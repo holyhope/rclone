@@ -1,5 +1,4 @@
 //go:build !plan9 && !js
-// +build !plan9,!js
 
 // Package azurefiles provides an interface to Microsoft Azure Files
 package azurefiles
@@ -65,7 +64,7 @@ import (
 const (
 	maxFileSize           = 4 * fs.Tebi
 	defaultChunkSize      = 4 * fs.Mebi
-	storageDefaultBaseURL = "core.windows.net" // FIXME not sure this is correct
+	storageDefaultBaseURL = "file.core.windows.net"
 )
 
 func init() {

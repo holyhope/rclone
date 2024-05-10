@@ -37,7 +37,27 @@ like this:
 rclone serve s3 --auth-key ACCESS_KEY_ID,SECRET_ACCESS_KEY remote:path
 ```
 
-This will be compatible with an rclone remote which is defined like this:
+For example, to use a simple folder in the filesystem, run the server
+with a command like this:
+
+```
+rclone serve s3 --auth-key ACCESS_KEY_ID,SECRET_ACCESS_KEY local:/path/to/folder
+```
+
+The `rclone.conf` for the server could look like this:
+
+```
+[local]
+type = local
+```
+
+The `local` configuration is optional though. If you run the server with a
+`remote:path` like `/path/to/folder` (without the `local:` prefix and without an
+`rclone.conf` file), rclone will fall back to a default configuration, which
+will be visible as a warning in the logs. But it will run nonetheless.
+
+This will be compatible with an rclone (client) remote configuration which
+is defined like this:
 
 ```
 [serves3]
@@ -55,8 +75,19 @@ Note that setting `disable_multipart_uploads = true` is to work around
 ### Bugs
 
 When uploading multipart files `serve s3` holds all the parts in
-memory. This is a limitaton of the library rclone uses for serving S3
-and will hopefully be fixed at some point.
+memory (see [#7453](https://github.com/rclone/rclone/issues/7453)).
+This is a limitaton of the library rclone uses for serving S3 and will
+hopefully be fixed at some point.
+
+Multipart server side copies do not work (see
+[#7454](https://github.com/rclone/rclone/issues/7454)). These take a
+very long time and eventually fail. The default threshold for
+multipart server side copies is 5G which is the maximum it can be, so
+files above this side will fail to be server side copied.
+
+For a current list of `serve s3` bugs see the [serve
+s3](https://github.com/rclone/rclone/labels/serve%20s3) bug category
+on GitHub.
 
 ### Limitations
 

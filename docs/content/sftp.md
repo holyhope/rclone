@@ -279,6 +279,8 @@ option before first run, the auto-detection will be skipped, and if
 you set a different value later this will override any existing.
 Value `none` can be set to avoid any attempts at executing shell
 commands, e.g. if this is not allowed on the server.
+If you have `shell_type = none` in the configuration then
+the [ssh](#sftp-ssh) must not be set.
 
 When the server is [rclone serve sftp](/commands/rclone_serve_sftp/),
 the rclone SFTP remote will detect this as a Unix type shell - even
@@ -1013,6 +1015,43 @@ Properties:
 
 - Config:      socks_proxy
 - Env Var:     RCLONE_SFTP_SOCKS_PROXY
+- Type:        string
+- Required:    false
+
+#### --sftp-copy-is-hardlink
+
+Set to enable server side copies using hardlinks.
+
+The SFTP protocol does not define a copy command so normally server
+side copies are not allowed with the sftp backend.
+
+However the SFTP protocol does support hardlinking, and if you enable
+this flag then the sftp backend will support server side copies. These
+will be implemented by doing a hardlink from the source to the
+destination.
+
+Not all sftp servers support this.
+
+Note that hardlinking two files together will use no additional space
+as the source and the destination will be the same file.
+
+This feature may be useful backups made with --copy-dest.
+
+Properties:
+
+- Config:      copy_is_hardlink
+- Env Var:     RCLONE_SFTP_COPY_IS_HARDLINK
+- Type:        bool
+- Default:     false
+
+#### --sftp-description
+
+Description of the remote
+
+Properties:
+
+- Config:      description
+- Env Var:     RCLONE_SFTP_DESCRIPTION
 - Type:        string
 - Required:    false
 

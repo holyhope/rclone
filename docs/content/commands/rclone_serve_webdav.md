@@ -126,6 +126,17 @@ to be used within the template to server pages:
 |-- .Size     | Size in Bytes of the entry. |
 |-- .ModTime  | The UTC timestamp of an entry. |
 
+The server also makes the following functions available so that they can be used within the
+template. These functions help extend the options for dynamic rendering of HTML. They can
+be used to render HTML based on specific conditions.
+
+| Function   | Description |
+| :---------- | :---------- |
+| afterEpoch  | Returns the time since the epoch for the given time. |
+| contains    | Checks whether a given substring is present or not in a given string. |
+| hasPrefix   | Checks whether the given string begins with the specified prefix. |
+| hasSuffix   | Checks whether the given string end with the specified suffix. |
+
 ### Authentication
 
 By default this will serve files without needing a login.
@@ -464,6 +475,28 @@ If the flag is not provided on the command line, then its default value depends
 on the operating system where rclone runs: "true" on Windows and macOS, "false"
 otherwise. If the flag is provided without a value, then it is "true".
 
+The `--no-unicode-normalization` flag controls whether a similar "fixup" is
+performed for filenames that differ but are [canonically
+equivalent](https://en.wikipedia.org/wiki/Unicode_equivalence) with respect to
+unicode. Unicode normalization can be particularly helpful for users of macOS,
+which prefers form NFD instead of the NFC used by most other platforms. It is
+therefore highly recommended to keep the default of `false` on macOS, to avoid
+encoding compatibility issues.
+
+In the (probably unlikely) event that a directory has multiple duplicate
+filenames after applying case and unicode normalization, the `--vfs-block-norm-dupes`
+flag allows hiding these duplicates. This comes with a performance tradeoff, as
+rclone will have to scan the entire directory for duplicates when listing a
+directory. For this reason, it is recommended to leave this disabled if not
+needed. However, macOS users may wish to consider using it, as otherwise, if a
+remote directory contains both NFC and NFD versions of the same filename, an odd
+situation will occur: both versions of the file will be visible in the mount,
+and both will appear to be editable, however, editing either version will
+actually result in only the NFD version getting edited under the hood. `--vfs-block-
+norm-dupes` prevents this confusion by detecting this scenario, hiding the
+duplicates, and logging an error, similar to how this is handled in `rclone
+sync`.
+
 ## VFS Disk Options
 
 This flag allows you to manually set the statistics about the filing system.
@@ -496,7 +529,7 @@ together, if `--auth-proxy` is set the authorized keys option will be
 ignored.
 
 There is an example program
-[bin/test_proxy.py](https://github.com/rclone/rclone/blob/master/test_proxy.py)
+[bin/test_proxy.py](https://github.com/rclone/rclone/blob/master/bin/test_proxy.py)
 in the rclone source code.
 
 The program's job is to take a `user` and `pass` on the input and turn
@@ -604,6 +637,7 @@ rclone serve webdav remote:path [flags]
       --uid uint32                             Override the uid field set by the filesystem (not supported on Windows) (default 1000)
       --umask int                              Override the permission bits set by the filesystem (not supported on Windows) (default 2)
       --user string                            User name for authentication
+      --vfs-block-norm-dupes                   If duplicate filenames exist in the same directory (after normalization), log an error and hide the duplicates (may have a performance cost)
       --vfs-cache-max-age Duration             Max time since last access of objects in the cache (default 1h0m0s)
       --vfs-cache-max-size SizeSuffix          Max total size of objects in the cache (default off)
       --vfs-cache-min-free-space SizeSuffix    Target minimum free space on the disk containing the cache (default off)
@@ -616,6 +650,7 @@ rclone serve webdav remote:path [flags]
       --vfs-read-chunk-size SizeSuffix         Read the source objects in chunks (default 128Mi)
       --vfs-read-chunk-size-limit SizeSuffix   If greater than --vfs-read-chunk-size, double the chunk size after each chunk read, until the limit is reached ('off' is unlimited) (default off)
       --vfs-read-wait Duration                 Time to wait for in-sequence read before seeking (default 20ms)
+      --vfs-refresh                            Refreshes the directory cache recursively in the background on start
       --vfs-used-is-size rclone size           Use the rclone size algorithm for Used size
       --vfs-write-back Duration                Time to writeback files after last use when using cache (default 5s)
       --vfs-write-wait Duration                Time to wait for in-sequence write before giving error (default 1s)

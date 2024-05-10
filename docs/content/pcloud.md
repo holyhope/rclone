@@ -225,7 +225,7 @@ Properties:
 
 - Config:      encoding
 - Env Var:     RCLONE_PCLOUD_ENCODING
-- Type:        MultiEncoder
+- Type:        Encoding
 - Default:     Slash,BackSlash,Del,Ctl,InvalidUtf8,Dot
 
 #### --pcloud-root-folder-id
@@ -285,6 +285,17 @@ Properties:
 
 - Config:      password
 - Env Var:     RCLONE_PCLOUD_PASSWORD
+- Type:        string
+- Required:    false
+
+#### --pcloud-description
+
+Description of the remote
+
+Properties:
+
+- Config:      description
+- Env Var:     RCLONE_PCLOUD_DESCRIPTION
 - Type:        string
 - Required:    false
 

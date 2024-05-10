@@ -30,7 +30,6 @@ docs = [
     # Keep these alphabetical by full name
     "fichier.md",
     "alias.md",
-    "amazonclouddrive.md",
     "s3.md",
     "b2.md",
     "box.md",
@@ -50,10 +49,11 @@ docs = [
     "hdfs.md",
     "hidrive.md",
     "http.md",
+    "imagekit.md",
     "internetarchive.md",
     "jottacloud.md",
     "koofr.md",
-    "linkbox.md"
+    "linkbox.md",
     "mailru.md",
     "mega.md",
     "memory.md",
@@ -79,6 +79,7 @@ docs = [
     "storj.md",
     "sugarsync.md",
     "tardigrade.md",            # stub only to redirect to storj.md
+    "ulozto.md",
     "uptobox.md",
     "union.md",
     "webdav.md",
@@ -121,6 +122,7 @@ ignore_docs = [
     "downloads.md",
     "privacy.md",
     "sponsor.md",
+    "amazonclouddrive.md",
 ]
 
 def read_doc(doc):
